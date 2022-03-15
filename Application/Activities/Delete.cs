@@ -20,7 +20,7 @@ namespace Application.Activities
 
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                context.Activities.Remove(await context.Activities.FindAsync(request.Id, cancellationToken));
+                context.Activities.Remove(await context.Activities.FindAsync(request.Id));
                 await context.SaveChangesAsync(cancellationToken);
                 return Unit.Value;
             }
