@@ -1,42 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import {Grid} from 'semantic-ui-react';
-import { Container, List } from 'semantic-ui-react';
-
-import axios from 'axios';
+import { Grid } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity'
 
+import ActivityList from './ActivityList';
+import ActivityDetails from '../details/ActivityDetails';
+import ActivityForm from '../form/ActivityForm';
+
+
+
 interface Props {
-    activityes: Activity[]
+    editMode : boolean;
+    activities : Activity[];
+    selectedActivity : Activity | undefined;
+    beginEdit: (edit : boolean) => void;
+    selectActivity: (id: string | undefined) => void;
+    deleteActivity: (id: string) => void;
+    createOrEdit: (activity: Activity) => void;
 }
 
-// export default function ActivityDashboard({activityes}: Props){
-export default function ActivityDashboard() {
-    const [activities, setActivities] = useState<Activity[]>([]);
-
-        useEffect(() => {
-          axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
-            setActivities(response.data);
-          })
-        }, [])
-
+export default function ActivityDashboard({editMode, beginEdit, selectActivity, createOrEdit, deleteActivity, activities, selectedActivity} : Props) {
+    
     return (
-        
         <Grid>
             <Grid.Column width="10">
-                <List>
-                    {activities.map(activity => (
-                        <List.Item key={activity.id} style={{ color: '#cccccc', fontSize: '18px', fontWeight: 'bold', fontFamily: 'Veranda' }}>
-
-                            {activity.category}
-
-                            <List.Item key={activity.id} style={{ color: '#aaaaaa', fontSize: '12px' }}>
-                                {activity.city} / {activity.venue}
-                            </List.Item>
-
-                        </List.Item>
-                    ))}
-
-                </List>
+                <ActivityList activities ={activities} select={selectActivity} deleteActivity={deleteActivity}/>
+            </Grid.Column>
+            <Grid.Column width="6">
+                {selectedActivity && !editMode && <ActivityDetails activity ={selectedActivity} CancelSelect={() => selectActivity(undefined)} BeginEdit={beginEdit}/>}
+                {editMode && <ActivityForm activity ={selectedActivity} CancelEdit={beginEdit} CreateOrEdit={createOrEdit}/>}                
             </Grid.Column>
         </Grid>
     )

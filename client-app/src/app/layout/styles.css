@@ -1,3 +1,10 @@
+
+:root {
+  --MainLightColor : #404545bb;
+  --DarkLightColor : #253034;
+  --textColor : #CCCCCC;
+}
+
 body {
   background: #253034 !important;
   
@@ -5,4 +12,14 @@ body {
 
 .ui.inverted.top.fixed.menu {
   background-image:  linear-gradient(0deg, #253034 ,#424545 , #347392) !important;
+}
+.ui.right.floated.button {
+  background: #404545;
+}
+button.ui.vk.button {
+  background: #404545;
+
+}
+.ui.button{
+  border-radius: 0;
 }
