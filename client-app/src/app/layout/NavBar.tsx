@@ -20,7 +20,7 @@ export default function NavBar(props: Props) {
                 </Menu.Item>
                 <Menu.Item name="Activities" />
                 <Menu.Item>
-                    <Button color="vk" content="Create Activity" onClick={CreateActivity} />
+                    <Button positive content="Create Activity" onClick={CreateActivity} />
                 </Menu.Item>
             </Container>
 

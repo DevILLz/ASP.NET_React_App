@@ -19,9 +19,9 @@ export default function ActivityDetails({activity, CancelSelect, BeginEdit}: Pro
       </Card.Content>
       <Card.Content extra>
         <div>
-          <Button.Group widths="2">
-            <Button basic color="blue" content="edit" onClick={() => BeginEdit(true)} />
-            <Button basic color="red" content="cancel" onClick={CancelSelect}/>
+          <Button.Group widths="2" fluid>
+            <Button color="blue" content="edit" onClick={() => BeginEdit(true)} />
+            <Button color="red" content="cancel" onClick={CancelSelect}/>
           </Button.Group>
         </div>
       </Card.Content>

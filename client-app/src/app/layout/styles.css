@@ -16,10 +16,16 @@ body {
 .ui.right.floated.button {
   background: #404545;
 }
-button.ui.vk.button {
-  background: #404545;
+button.ui.positive.button {
+  background: #40454544;
 
 }
 .ui.button{
   border-radius: 0;
+}
+.ui.mini.negative.right.floated.button{
+  background: transparent;
+  color: rgba(160, 0, 0);
+  margin-top: -17px;
+  margin-right: -22px;
 }

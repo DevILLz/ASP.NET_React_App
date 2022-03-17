@@ -7,9 +7,10 @@ interface Props {
     activity: Activity | undefined;
     CancelEdit:(edit : boolean) => void;
     CreateOrEdit: (activity: Activity) => void;
+    submitting: boolean; 
 }
 
-export default function ActivityForm({activity : selectedActivity, CancelEdit, CreateOrEdit}: Props)
+export default function ActivityForm({activity : selectedActivity, submitting, CancelEdit, CreateOrEdit}: Props)
 {
     const initialState = selectedActivity ?? {
         id: '',
@@ -23,7 +24,7 @@ export default function ActivityForm({activity : selectedActivity, CancelEdit, C
     const [activity, setActivity] = useState(initialState);
 
     function handleSubmit(){
-        console.log(activity);
+        CreateOrEdit(activity);
     }
     function handleInputChange(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const {name, value} = event.target;
@@ -40,8 +41,8 @@ export default function ActivityForm({activity : selectedActivity, CancelEdit, C
             <Form.Input placeholder="City" value={activity.city} name="city" onChange={handleInputChange}/>
             <Form.Input placeholder="Venue" value={activity.venue} name="venue" onChange={handleInputChange}/>
 
-            <Button floated="right" positive type="submit" content="Submit" onClick={() => CreateOrEdit(activity)}/>
-            <Button floated="right" type="button" content="Cancel" onClick={() => CancelEdit(false)}/>
+            <Button loading={submitting} floated="right" positive type="submit" content="Submit"/>
+            <Button floated="right" negative type="button" content="Cancel" onClick={() => CancelEdit(false)}/>
         </Form>
     </Segment>
   )
