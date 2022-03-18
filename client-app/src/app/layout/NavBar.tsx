@@ -1,16 +1,9 @@
+import { useStore } from 'app/stores/store';
 import { Button, Container, Menu } from 'semantic-ui-react';
+import { observer } from 'mobx-react-lite';
 
-interface Props {
-    // activity: Activity;
-    openForm: (edit: boolean) => void;
-    cancelSelectedActivity: () => void;
-}
-
-export default function NavBar(props: Props) {
-    function CreateActivity() {
-        props.cancelSelectedActivity();
-        props.openForm(true);
-    }
+export default observer(function NavBar() {
+    const {activityStore} = useStore();
     return (
         <Menu inverted fixed="top">
             <Container>
@@ -20,10 +13,10 @@ export default function NavBar(props: Props) {
                 </Menu.Item>
                 <Menu.Item name="Activities" />
                 <Menu.Item>
-                    <Button positive content="Create Activity" onClick={CreateActivity} />
+                    <Button positive content="Create Activity" onClick={() => activityStore.openForm()} />
                 </Menu.Item>
             </Container>
 
         </Menu>
     )
-}
+})

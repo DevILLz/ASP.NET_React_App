@@ -1,34 +1,23 @@
 import { Grid } from 'semantic-ui-react';
-import { Activity } from '../../../app/models/activity'
-
 import ActivityList from './ActivityList';
 import ActivityDetails from '../details/ActivityDetails';
 import ActivityForm from '../form/ActivityForm';
+import { useStore } from 'app/stores/store';
+import { observer } from 'mobx-react-lite';
 
-
-
-interface Props {
-    editMode : boolean;
-    activities : Activity[];
-    selectedActivity : Activity | undefined;
-    beginEdit: (edit : boolean) => void;
-    selectActivity: (id: string | undefined) => void;
-    deleteActivity: (id: string) => void;
-    createOrEdit: (activity: Activity) => void;
-    submitting: boolean; 
-}
-
-export default function ActivityDashboard({editMode, beginEdit, selectActivity, createOrEdit, deleteActivity, activities, selectedActivity, submitting} : Props) {
+export default observer(function ActivityDashboard() {
     
+    const {activityStore} = useStore();
+    const {selectedActivity, editMode} = activityStore;
     return (
         <Grid>
             <Grid.Column width="10">
-                <ActivityList activities ={activities} select={selectActivity} deleteActivity={deleteActivity} submitting={submitting}/>
+                <ActivityList/>
             </Grid.Column>
             <Grid.Column width="6">
-                {selectedActivity && !editMode && <ActivityDetails activity ={selectedActivity} CancelSelect={() => selectActivity(undefined)} BeginEdit={beginEdit}/>}
-                {editMode && <ActivityForm activity ={selectedActivity} CancelEdit={beginEdit} CreateOrEdit={createOrEdit} submitting={submitting} />}                
+                {selectedActivity && !editMode && <ActivityDetails/>}
+                {editMode && <ActivityForm/>  }  
             </Grid.Column>
         </Grid>
     )
-}
+})
