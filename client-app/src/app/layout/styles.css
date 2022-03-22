@@ -1,3 +1,4 @@
+@import 'semantic-ui-css/semantic.min.css';
 :root {
   --MainLightColor : #404545bb;
   --DarkLightColor : #253034;
@@ -61,5 +62,9 @@ body {
   font-size: 1.7em;
   font-weight: normal;
 }
-
+.item.active{
+  background: linear-gradient(
+    #ffffff55 0%,
+    #25303455 89%) !important;
+}
 /*end home page styles*/

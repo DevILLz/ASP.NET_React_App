@@ -22,7 +22,8 @@ namespace Application.Activities
             public async Task<Activity> Handle(Query request, CancellationToken cancellationToken)
             {
                 var act = await context.Activities.FindAsync(request.Id);
-                return act;
+                if (act == null) throw new Exception("Activity not found");
+                else return act;
             }
         }
     }
