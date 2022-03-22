@@ -1,53 +1,25 @@
 import { useStore } from 'app/stores/store';
 import { observer } from 'mobx-react-lite';
-import { SyntheticEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Button,  Item, Segment, Label, Image, Grid } from 'semantic-ui-react';
+import { Header, Item, Segment } from 'semantic-ui-react';
+import ActivityListItem from './ActivityListItem'
 
 export default observer(function ActivityList() {
     const { activityStore } = useStore();
-    const { deleteActivity, activitiesByDate : activities, loading } = activityStore;
-    const [target, setTarget] = useState('');
-    function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-        setTarget(e.currentTarget.name);
-        deleteActivity(id);
-    }
-    
+    const { groupedActivitiesByDate: activities } = activityStore;
+
+
     return (
-        <Segment>
-            <Item.Group divided>
-                {activities.map(activity => (
-                    <Item key={activity.id}>
-                        <Item.Content >
-                            <Grid columns={2} divided >
-                                <Grid.Column width={6}>
-                                    <Image src={`/assets/categoryImages/${activity.category}.jpg`} verticalAlign="bottom" />
-                                </Grid.Column>
-                                <Grid.Column width={10} >
-                                    <Button name={activity.id}
-                                        size="mini"
-                                        negative floated="right"
-                                        loading={loading && target === activity.id}
-                                        content="X" 
-                                        onClick={(e) => handleActivityDelete(e, activity.id)} />
-                                    <Item.Header as="a" content={activity.title} />
-                                    <Item.Meta content={activity.date} format="yyyy-MM-dd" />
-                                    <Item.Description>
-                                        <div>{activity.description}</div>
-                                        <div>{activity.city}, {activity.venue}</div>
-                                    </Item.Description>
-                                    <Item.Description>
-                                        <Item.Extra>
-                                            <Button as={Link} to={`/activities/${activity.id}`} floated="right" content="View" positive/>
-                                            <Label content={activity.category}/>
-                                        </Item.Extra>
-                                    </Item.Description>
-                                </Grid.Column>
-                            </Grid>
-                        </Item.Content>
-                    </Item>
-                ))}
-            </Item.Group>
-        </Segment>
+        <div>
+            {activities.map(([group, activities]) => (
+                <Segment key={group}>
+                    <Item.Group divided>
+                        <Header content={group} color="teal"/>
+                        {activities.map(activity => (
+                            <ActivityListItem key={activity.id} activity={activity} />
+                        ))}
+                    </Item.Group>
+                </Segment>
+            ))}
+        </div>
     )
 })
