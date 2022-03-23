@@ -12,6 +12,7 @@ export default observer(function NavBar() {
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/activities' name="Activities" />
                 <Menu.Item as={NavLink} to='/createActivity' content="Create Activity"/>
+                <Menu.Item as={NavLink} to='/errors' content="Errors Test"/>
             </Container>
 
         </Menu>

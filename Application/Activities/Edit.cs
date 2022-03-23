@@ -1,3 +1,4 @@
+using Application.Core;
 using AutoMapper;
 using Domain;
 using FluentValidation;
@@ -8,7 +9,7 @@ namespace Application.Activities
 {
     public class Edit
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             public Activity Activity { get; set; }
         }
@@ -19,7 +20,7 @@ namespace Application.Activities
                 RuleFor(x => x.Activity).SetValidator(new ActivityValidator());
             }
         }
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext context;
             private readonly IMapper mapper;
@@ -30,12 +31,15 @@ namespace Application.Activities
                 this.mapper = mapper;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await context.Activities.FindAsync(request.Activity.Id);
+                if (activity == null) return null;
                 mapper.Map(request.Activity, activity);
-                await context.SaveChangesAsync(cancellationToken);
-                return Unit.Value;
+                
+                if (!(await context.SaveChangesAsync(cancellationToken) > 0))
+                    return Result<Unit>.Failure("Failed to edit activity");
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }

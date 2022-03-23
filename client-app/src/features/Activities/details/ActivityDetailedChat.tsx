@@ -8,8 +8,6 @@ export default observer(function ActivityDetailedChat() {
             <Segment
                 textAlign='center'
                 attached='top'
-                inverted
-                color='teal'
                 style={{border: 'none'}}
             >
                 <Header>Chat about this event</Header>

@@ -11,8 +11,6 @@ export default observer(function ActivityDetailedSidebar () {
                 style={{ border: 'none' }}
                 attached='top'
                 secondary
-                inverted
-                color='teal'
             >
                 3 People Going
             </Segment>

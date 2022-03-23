@@ -12,7 +12,7 @@ export default observer(function ActivityListItem({ activity }: Props) {
         <Segment.Group >
             <Segment>
                 <Item.Group>
-                    <Item>
+                    <Item id="itemHeader">
                         <Image src="/assets/user.png" size="tiny" circular />
                         <Item.Content >
                             <Item.Header content={activity.title} key={activity.id} as={Link} to={`/activities/${activity.id}`}/>

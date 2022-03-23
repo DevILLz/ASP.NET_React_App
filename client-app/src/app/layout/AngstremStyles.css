@@ -1,0 +1,86 @@
+:root {
+    --Cyan: #347392;
+    --SemiCyan: #34739288;
+    --MainLightColor : #404545;
+    --MainMediumColor : #374040;
+    --MainDarkColor : #253034;
+    --textColor : #CCCCCC;
+    --textDarkColor : #999999;
+    --textHoverColor : var(--Cyan);
+  }
+
+  body, .button, .ui.inverted.top.fixed.menu, .ui.segment, .item, .react-calendar,
+  .Toastify__toast-theme--light
+  {
+    background: var(--MainLightColor) !important;
+  }
+  .ui.secondary.segment, .ui.attached.header, .react-calendar__navigation, .top.attached{
+    background:var(--MainMediumColor) !important;
+  }
+   input, textarea{
+    background: var(--MainDarkColor) !important;
+  }
+  .ui.basic, #basic{
+    background: transparent !important;
+    color: var(--textColor) !important;
+  }
+  .button:hover{
+    background: var(--MainMediumColor) !important;
+  }
+  .ui, .header, .description, button, .button, .react-calendar, .react-calendar__navigation, input, textarea, .item, .text, a,
+  .Toastify__toast-theme--light, .Toastify__close-button--light,
+  .item:hover 
+  {
+    color: var(--textColor) !important;
+  }
+  
+  a:hover{
+    color: var(--textHoverColor) !important;
+  }
+  div, .react-calendar__month-view__days__day--neighboringMonth{
+    color: var(--textDarkColor) !important;
+  }
+
+  .button, .item, .ui.menu, .ui.vertical.menu>.item:last-child{
+    border-radius: 0 !important;
+  }
+  .ui.attached.header, .ui.segment, .react-calendar__navigation, .react-calendar, .button, .ui.menu,
+  .Toastify__toast-theme--light{
+    border-left: 1px solid #575959 !important;
+    border-top: 1px solid #575959 !important;
+    border-right: 1px solid #292c2c !important;
+    border-bottom: 1px solid #292c2c !important;  
+  }
+  #itemHeader, .ui.basic, #basic{
+    border: 0 !important;
+  }
+  .ui.inverted.top.fixed.menu{
+    border-bottom: 0 !important;
+  }
+  .item, .ui.menu{
+    border-top: 0 !important; 
+  }
+  .item{
+    border-top: 1px solid #575959 !important;
+  }
+
+  .react-calendar__month-view__days__day--weekend{
+    color: #ee5555b6 !important;
+  }
+  .react-calendar__tile--now{
+    background: var(--SemiCyan) !important;
+  }
+  .react-calendar__tile--active {
+    background: var(--Cyan) !important;
+  }
+  .react-calendar__tile:hover, .react-calendar__navigation__label:hover, .react-calendar__navigation__arrow:hover, .item:hover{
+    background: var(--Cyan) !important;
+  }
+  #itemHeader:hover{
+    background: transparent !important;
+  }
+  .ui.error.message{
+    background: #413b3b !important;
+    box-shadow: 0 0 0 1px #2b2222 inset, 0 0 0 0 transparent !important;
+  }
+  
