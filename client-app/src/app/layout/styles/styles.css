@@ -17,7 +17,7 @@ body{
           #253034 0%,
           #424545 39%,
           #347392 89%
-  ) !important;
+  );
   height: 100vh;
 }
 
@@ -39,7 +39,7 @@ body{
   background: linear-gradient(
     #ffffff55 0%,
     #555555 3%,
-    #25303455 89%) !important;
+    #25303455 89%);
 }
 /*end home page styles*/
 .react-calendar {

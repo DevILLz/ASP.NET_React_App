@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import { Button, Item, Image, Segment, Icon } from 'semantic-ui-react';
@@ -25,7 +26,7 @@ export default observer(function ActivityListItem({ activity }: Props) {
             </Segment>
             <Segment>
                 <span>
-                    <Icon name='clock'/> {activity.date}
+                    <Icon name='clock'/> {format(activity.date!, 'dd MMM yyyy h:mm aa')}
                     <Icon name='marker'/> {activity.venue}
                 </span>
             </Segment>
@@ -34,7 +35,7 @@ export default observer(function ActivityListItem({ activity }: Props) {
             </Segment>
             <Segment clearing>
                 <span>{activity.description}</span>
-                <Button icon='edit' size="mini" color='vk'
+                <Button icon='edit' size="mini" 
                                         floated="right"
                                         key={activity.id} as={Link} to={`/activities/${activity.id}`} />
             </Segment>
