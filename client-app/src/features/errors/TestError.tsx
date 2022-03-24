@@ -44,7 +44,7 @@ export default function TestErrors() {
                     <Button onClick={handleBadGuid} content='Bad Guid' basic color='grey'/>
                 </Button.Group>
             </Segment>
-            {errors !== null ? <ValidationErrors errors={errors}/> : <div></div>}
+            {errors ?? <ValidationErrors errors={errors}/>}
         </>
     )
 }

@@ -1,13 +1,4 @@
-:root {
-    --Cyan: #347392;
-    --SemiCyan: #34739288;
-    --MainLightColor : #404545;
-    --MainMediumColor : #374040;
-    --MainDarkColor : #253034;
-    --textColor : #CCCCCC;
-    --textDarkColor : #999999;
-    --textHoverColor : var(--Cyan);
-  }
+@import './colors.css';
 
   body, .button, .ui.inverted.top.fixed.menu, .ui.segment, .item, .react-calendar,
   .Toastify__toast-theme--light
@@ -46,10 +37,10 @@
   }
   .ui.attached.header, .ui.segment, .react-calendar__navigation, .react-calendar, .button, .ui.menu,
   .Toastify__toast-theme--light{
-    border-left: 1px solid #575959 !important;
-    border-top: 1px solid #575959 !important;
-    border-right: 1px solid #292c2c !important;
-    border-bottom: 1px solid #292c2c !important;  
+    border-left: 1px solid var(--LightBorderColor) !important;
+    border-top: 1px solid var(--LightBorderColor) !important;
+    border-right: 1px solid var(--DarkBorderColor) !important;
+    border-bottom: 1px solid var(--DarkBorderColor) !important;  
   }
   #itemHeader, .ui.basic, #basic{
     border: 0 !important;
@@ -61,11 +52,11 @@
     border-top: 0 !important; 
   }
   .item{
-    border-top: 1px solid #575959 !important;
+    border-top: 1px solid var(--LightBorderColor) !important;
   }
 
   .react-calendar__month-view__days__day--weekend{
-    color: #ee5555b6 !important;
+    color: var(--Red) !important;
   }
   .react-calendar__tile--now{
     background: var(--SemiCyan) !important;
@@ -80,7 +71,7 @@
     background: transparent !important;
   }
   .ui.error.message{
-    background: #413b3b !important;
-    box-shadow: 0 0 0 1px #2b2222 inset, 0 0 0 0 transparent !important;
+    background: var(--DarkPaleRed) !important;
+    box-shadow: 0 0 0 1px var(--DarkRed) inset, 0 0 0 0 transparent !important;
   }
   
