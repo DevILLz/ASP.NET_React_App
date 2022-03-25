@@ -1,3 +1,4 @@
+import { User, UserFormValues } from './../models/user';
 import { store } from './../stores/store';
 import { Activity } from 'app/models/activity';
 import axios, { AxiosError, AxiosResponse } from 'axios';
@@ -11,6 +12,12 @@ const sleep = (delay: number) => {
 }
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+    if (token) config.headers!.Authorization = 'Bearer ' + token;
+    return config;
+})
 axios.interceptors.response.use(async response => {
     await sleep(200)
     return response
@@ -36,6 +43,7 @@ axios.interceptors.response.use(async response => {
             break;
         case 401:
             toast.error('unautorized');
+            history.push('/Login')
             break;
         case 404:
             history.push('/not-found')
@@ -61,8 +69,16 @@ const Activities = {
     update: (activity: Activity) => requests.put<void>(`/activities/${activity.id}`, activity),
     delete: (id: string) => requests.delete<void>(`/activities/${id}`),
 }
+
+const Account = {
+    current: () => requests.get<User>(`/account`),
+    login: (user: UserFormValues) => requests.post<User>(`/account/login`, user),
+    register: (user: UserFormValues) => requests.post<User>(`/account/register`, user),
+}
+
 const agent = {
-    Activities
+    Activities,
+    Account
 }
 export default agent;
 // useEffect(() => {

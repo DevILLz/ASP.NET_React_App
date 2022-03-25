@@ -36,20 +36,26 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await _userManager.Users.AnyAsync(u => u.Email == registerDto.Email))
-                return BadRequest("Email taken");
+            {
+                ModelState.AddModelError("email", "Email taken");
+                return ValidationProblem(ModelState);
+            }
             if (await _userManager.Users.AnyAsync(u => u.UserName == registerDto.UserName))
-                return BadRequest("UserName taken");
+            {
+                ModelState.AddModelError("userName", "UserName taken");
+                return ValidationProblem(ModelState);
+            }
             var user = new AppUser
             {
                 UserName = registerDto.UserName,
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-            }; 
+            };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
             if (result.Succeeded)
                 return CreateUserObject(user);
-
-            return BadRequest("Problem registering user");
+            ModelState.AddModelError("problem", "Problem registering user");
+            return ValidationProblem(ModelState);
         }
         [Authorize]
         [HttpGet]
