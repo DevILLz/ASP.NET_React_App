@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System.Security.Claims;
 
@@ -27,7 +28,10 @@ namespace Infrastructure.Security
             if (userId == null) return Task.CompletedTask;
             var activityId = Guid.Parse(contextAccessor.HttpContext?.Request.RouteValues
             .SingleOrDefault(x => x.Key == "id").Value?.ToString() ?? "");
-            var attendee = this.context.ActivityAttendees.Find(userId, activityId);
+
+            var attendee = this.context.ActivityAttendees
+            .AsNoTracking()
+            .SingleOrDefault(x => x.AppUserId == userId && x.ActivityId == activityId);
             if (attendee == null) return Task.CompletedTask;
             if (attendee.IsHost) context.Succeed(requirement);
             return Task.CompletedTask;
