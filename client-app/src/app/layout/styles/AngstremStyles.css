@@ -72,7 +72,7 @@
   }
   .react-calendar__tile--active, .react-calendar__tile:hover, .react-calendar__navigation__label:hover, .react-calendar__navigation__arrow:hover, 
   .react-datepicker__day--selected, .react-datepicker__time-list-item--selected,
-  .item:not(#itemHeader):hover{
+  .item:not(#itemHeader, #basic):hover{
     background: var(--Cyan) !important;
   }
   .ui.error.message{
