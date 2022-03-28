@@ -45,7 +45,7 @@ namespace Persistence
 
                 foreach (var user in users)
                 {
-                    await userManager.CreateAsync(user, " ");
+                    await userManager.CreateAsync(user, "Pa$$word1");
                 }
 
                 var activities = new List<Activity>
