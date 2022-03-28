@@ -11,7 +11,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.request.use(config => {
     const token = store.commonStore.token;
@@ -19,7 +19,9 @@ axios.interceptors.request.use(config => {
     return config;
 })
 axios.interceptors.response.use(async response => {
-    await sleep(200)
+    
+    if (process.env.NODE_ENV === 'development')
+        await sleep(200)
     return response
 
 }, (error: AxiosError) => {
@@ -82,8 +84,3 @@ const agent = {
     Account
 }
 export default agent;
-// useEffect(() => {
-//     axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
-//       setActivities(response.data);
-//     })
-//   }, [

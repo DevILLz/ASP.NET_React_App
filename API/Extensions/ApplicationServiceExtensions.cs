@@ -24,13 +24,14 @@ namespace API.Extensions
             });
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", policy => {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+                    policy.AllowAnyMethod().AllowAnyHeader().AllowCredentials().WithOrigins("http://192.168.1.25:3000");
                 });
             });
             // services.AddMediatR(typeof(List.Handler).Assembly);
             services.AddMediatR(typeof(Application.Activities.Create).Assembly);
             services.AddAutoMapper(typeof(MappingProfiles).Assembly);
             services.AddScoped<IUserAccessor, UserAccessor>();
+            services.AddSignalR();
             
             return services;
         }
