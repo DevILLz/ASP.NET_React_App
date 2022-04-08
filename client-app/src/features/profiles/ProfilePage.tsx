@@ -11,18 +11,21 @@ import ProfileHeader from "./ProfileHeader";
 export default observer(function ProfilePage() {
     const {userName} = useParams<{userName: string}>();
     const {profileStore} = useStore();
-    const {loadingProfile, loadProfile, profile} = profileStore;
+    const {loadingProfile, loadProfile, profile, setActiveTab} = profileStore;
     useEffect(() => {
-        console.log(userName);
         loadProfile(userName);
+        return () => setActiveTab(0);
     }, [loadProfile, userName])
 
     if (loadingProfile) return <LoadingComponent content="loading profile..."/>
     return (
         <Grid>
             <Grid.Column width={16}>
-                <ProfileHeader profile={profile!}/>
-                <ProfileContent profile={profile!}/>
+            {profile &&
+                    <>
+                        <ProfileHeader profile={profile} />
+                        <ProfileContent profile={profile} />
+                    </>}
             </Grid.Column>
         </Grid>
     )

@@ -43,13 +43,13 @@ namespace Application.Comments
                 var activity = await _dataContext.Activities.FindAsync(request.ActivityId);
                 if (activity == null) return null;
                 var user = await _dataContext.Users
-                // .Include(a => a.Photos)
+                .Include(a => a.Photos)
                 .SingleOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
                 var comment = new Comment
                 {
                     Author = user,
                     Activity = activity,
-                    Body = request.Body
+                    Body = request.Body,
                 };
                 activity.Comments.Add(comment);
                 if (await _dataContext.SaveChangesAsync() > 0)
