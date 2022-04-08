@@ -18,10 +18,12 @@ export default observer(function ActivityListItem({ activity }: Props) {
                 }
                 <Item.Group>
                     <Item id="itemHeader">
-                        <Image src="/assets/user.png" size="tiny" circular />
+                        <Image src={activity.host?.image || "/assets/user.png"} size="tiny" circular />
                         <Item.Content >
                             <Item.Header content={activity.title} key={activity.id} as={Link} to={`/activities/${activity.id}`} />
-                            <Item.Description content={`Hosted by ${activity.host?.displayName}`} />
+                            <Item.Description>
+                                Hosted by <Link to={`/profiles/${activity.hostUserName}`}>{activity.host?.displayName}</Link>
+                            </Item.Description>
                             {activity.isHost && (
                                 <Item.Description>
                                     <Label color="orange" content={`You are hosting this activity`} />
