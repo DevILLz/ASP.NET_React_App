@@ -14,7 +14,7 @@ export default observer(function NavBar() {
                 </Menu.Item>
                 <Menu.Item as={NavLink} to='/activities' name="Activities" />
                 <Menu.Item as={NavLink} to='/createActivity' content="Create Activity" />
-                <Menu.Item as={NavLink} to='/errors' content="Errors Test" />
+                {/* <Menu.Item as={NavLink} to='/errors' content="Errors Test" /> */}
                 <Menu.Item position='right'>
                     <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                     <Dropdown pointing="top left" text={user?.displayName}>
